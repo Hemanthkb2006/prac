@@ -26,11 +26,7 @@ pipeline {
                     credentialsId: 'dockerhub-PAT',
                     variable: 'DOCKER_PAT'
                 )]) {
-                    bat '''
-                        @echo off
-                        echo %DOCKER_PAT% | docker login -u hemanth2006kb --password-stdin
-                        if errorlevel 1 exit /b 1
-                    '''
+                    bat 'echo %DOCKER_PAT%| docker login -u hemanth2006kb --password-stdin'
                 }
             }
         }
