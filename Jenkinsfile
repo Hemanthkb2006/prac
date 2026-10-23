@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "hemanth2006kb/imagename5"
-        IMAGE_TAG = "Latest"
+        IMAGE_TAG = "latest"
     }
 
     stages {
@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t %DOCKER_IMAGE%:latest .'
+                bat "docker build -t %DOCKER_IMAGE%:%IMAGE_TAG% ."
             }
         }
 
@@ -27,9 +27,9 @@ pipeline {
                     variable: 'DOCKER_PAT'
                 )]) {
                     bat '''
-                    @echo off
-                    echo %DOCKER_PAT%|docker login -u hemanth2006kb --password-stdin
-                   if errorlevel 1 exit /b 1
+                        @echo off
+                        echo %DOCKER_PAT% | docker login -u hemanth2006kb --password-stdin
+                        if errorlevel 1 exit /b 1
                     '''
                 }
             }
@@ -37,7 +37,7 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                bat 'docker push %DOCKER_IMAGE%:latest'
+                bat "docker push %DOCKER_IMAGE%:%IMAGE_TAG%"
             }
         }
     }
