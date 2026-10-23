@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "hemanth2006kb/imagename3:latest"
+        DOCKER_IMAGE = "hemanth2006kb/imagename3"
+        IMAGE_TAG = "Latest"
     }
 
     stages {
